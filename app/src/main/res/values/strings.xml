@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">VerificaResultado</string>
+    <string name="action_settings">Settings</string>
+    <string name="verificar_resultado">Verificar Resultado</string>
+    <string name="digitar_numeros">Preencher Números</string>
+    <string name="total_numeros_premiados">Total Números A Premiar</string>
+    <string name="iniciar">VERIFICAR RESULTADOS</string>
+    <string name="salvar_file">SALVAR FILE</string>
+    <string name="sair">Sair</string>
+</resources>
