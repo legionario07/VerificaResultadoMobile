@@ -94,8 +94,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 llValue
         );
         ll.setLayoutParams(paramLL);
-
-
     }
 
     private void showDialog(String title, final Integer id) {

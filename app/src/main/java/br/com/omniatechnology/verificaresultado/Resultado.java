@@ -41,5 +41,4 @@ public class Resultado {
 	public String toString() {
 		return "[numeroJogo=" + numeroJogo + ", Acertos=" + totalAcertos + ",\n valores=" + valores + "]";
 	}
-	
 }
