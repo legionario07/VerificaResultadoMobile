@@ -1,27 +1,19 @@
 package br.com.omniatechnology.verificaresultado;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.ParcelFileDescriptor;
-import android.os.storage.StorageManager;
-import android.os.storage.StorageVolume;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
@@ -39,7 +31,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.FileStore;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -53,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button btnIniciar;
     private Button btnSaveToFile;
-    private List<Resultado> resultados;
+    private List<Result> results;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -158,16 +149,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 inputStream));
 
-        resultados = VerificaJogo.verificar(reader, numerosSorteados, totalValoresPremiados);
+        results = CheckLottery.verificar(reader, numerosSorteados, totalValoresPremiados);
 
-        if(resultados==null){
+        if(results ==null){
             txtResultado.setText("Erro ao Verificar Resultados");
             return "";
         }
 
         inputStream.close();
 
-        String retorno = VerificaJogo.gerarString(resultados);
+        String retorno = CheckLottery.gerarString(results);
 
         if (retorno != null) {
             txtResultado.setText(retorno);

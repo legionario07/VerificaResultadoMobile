@@ -5,30 +5,30 @@ import java.util.Set;
 
 public class LoteriaJogo {
 
-	private Set<Jogo> jogos;
+	private Set<Lottery> lotteries;
 	
 	public LoteriaJogo() {
-		jogos = new HashSet<Jogo>();
+		lotteries = new HashSet<Lottery>();
 	}
 
-	public Set<Jogo> getJogos() {
-		return jogos;
+	public Set<Lottery> getJogos() {
+		return lotteries;
 	}
 
-	public void setJogos(Set<Jogo> jogos) {
-		this.jogos = jogos;
+	public void setJogos(Set<Lottery> lotteries) {
+		this.lotteries = lotteries;
 	}
 
 	@Override
 	public String toString() {
-		return "LotoFacil [jogos=" + jogos + "]";
+		return "LotoFacil [jogos=" + lotteries + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((jogos == null) ? 0 : jogos.hashCode());
+		result = prime * result + ((lotteries == null) ? 0 : lotteries.hashCode());
 		return result;
 	}
 
@@ -41,10 +41,10 @@ public class LoteriaJogo {
 		if (getClass() != obj.getClass())
 			return false;
 		LoteriaJogo other = (LoteriaJogo) obj;
-		if (jogos == null) {
-			if (other.jogos != null)
+		if (lotteries == null) {
+			if (other.lotteries != null)
 				return false;
-		} else if (!jogos.equals(other.jogos))
+		} else if (!lotteries.equals(other.lotteries))
 			return false;
 		return true;
 	}
