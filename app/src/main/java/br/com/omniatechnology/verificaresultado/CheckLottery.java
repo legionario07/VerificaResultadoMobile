@@ -1,31 +1,40 @@
 package br.com.omniatechnology.verificaresultado;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class CheckLottery {
 
-    public static List<Result>  verificar(BufferedReader lerArq, String valoresPremiados, Integer quantidadeDeValoresACalcular) throws IOException {
+    public static List<Result> checkLottery(
+            BufferedReader lerArq,
+            String valoresPremiados,
+            Integer quantidadeDeValoresACalcular,
+            Context context
+    ) throws IOException {
 
         LoteriaJogo lotoFacil = new LoteriaJogo();
-        Lottery lotteryPremiado = new Lottery();
-
-        lotteryPremiado = replaceLottery(valoresPremiados.replace("[", "").replace("]", ""));
+        Lottery lotteryPremiado = replaceLottery(
+                valoresPremiados.replace("[", "").replace("]", ""),
+                context
+        );
 
         if (lotteryPremiado.getNumbersLottery().size() < quantidadeDeValoresACalcular) {
             return null;
         }
 
-        Lottery lottery = null;
+        Lottery lottery;
         String linha = lerArq.readLine();
         while (linha != null)
 
         {
-            lottery = new Lottery();
 
             linha = linha.replace("[", "").replace("]", "");
 
@@ -34,7 +43,7 @@ public class CheckLottery {
                 String[] values = linha.split(Pattern.quote("|"));
                 Integer numbers = Integer.parseInt(values[0].trim());
 
-                lottery = replaceLottery(values[1]);
+                lottery = replaceLottery(values[1].trim(), context);
                 lottery.setNumber(numbers);
                 lotoFacil.getJogos().add(lottery);
             }
@@ -91,15 +100,24 @@ public class CheckLottery {
         }
     }
 
-    private static Lottery replaceLottery(String textoSemFormato) {
+    private static Lottery replaceLottery(
+            String linePlaysValuesNoFormatted,
+            Context context
+    ) {
         Lottery lottery = new Lottery();
+        String[] linePlaysValuesFormatted = new String[0];
 
-        String[] valoresJogos = textoSemFormato.split(Pattern.quote(","));
+        try {
+            linePlaysValuesFormatted = linePlaysValuesNoFormatted.split(Pattern.quote(","));
 
-        for (int i = 0; i < valoresJogos.length; i++) {
-            lottery.getNumbersLottery().add(Integer.parseInt(valoresJogos[i].trim()));
+            for (String lineValue : linePlaysValuesFormatted) {
+                lottery.getNumbersLottery().add(Integer.parseInt(lineValue.trim()));
+            }
+        }catch (Exception ex) {
+            Toast.makeText(context,
+                    "Erro ao processar valores " + Arrays.toString(linePlaysValuesFormatted),
+                    Toast.LENGTH_LONG).show();
         }
-
         return lottery;
     }
 

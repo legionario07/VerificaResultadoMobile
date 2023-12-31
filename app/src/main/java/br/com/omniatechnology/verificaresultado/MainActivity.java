@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 inputStream));
 
-        results = CheckLottery.verificar(reader, numerosSorteados, totalValoresPremiados);
+        results = CheckLottery.checkLottery(reader, numerosSorteados, totalValoresPremiados, this);
 
         if(results ==null){
             txtResultado.setText("Erro ao Verificar Resultados");
